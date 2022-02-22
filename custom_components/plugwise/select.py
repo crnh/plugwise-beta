@@ -1,8 +1,6 @@
 """Plugwise Select component for Home Assistant."""
 from __future__ import annotations
 
-from typing import List
-
 from homeassistant.components.select import SelectEntity
 
 from homeassistant.config_entries import ConfigEntry
@@ -46,7 +44,7 @@ class PlugwiseSelectEntity(PlugwiseEntity, SelectEntity):
         self._attr_name = self.device.get("name")
 
     @property
-    def options(self) -> List[str] | None:
+    def options(self) -> list[str] | None:
         """Return the available schedules."""
         return self.device.get("available_schedules")
 
