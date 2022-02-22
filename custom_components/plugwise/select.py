@@ -1,8 +1,7 @@
 """Plugwise Select component for Home Assistant."""
 from __future__ import annotations
 
-from collections.abc import Mapping
-from typing import Any
+from typing import List
 
 from homeassistant.components.select import SelectEntity
 
@@ -59,8 +58,4 @@ class PlugwiseSelectEntity(PlugwiseEntity, SelectEntity):
     @plugwise_command
     async def async_select_option(self, option: str) -> None:
         """Change the selected schedule."""
-        if ((temperature := kwargs.get(ATTR_TEMPERATURE)) is None) or (
-            self._attr_max_temp < temperature < self._attr_min_temp
-        ):
-            raise ValueError("Invalid temperature requested")
         await self.coordinator.api.set_schedule_state(loc_id=self.device["location"], name=option, state="on")
